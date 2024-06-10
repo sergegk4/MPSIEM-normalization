@@ -1,0 +1,11 @@
+#[vpn1.sit.ru/VPN/vpn.sit.ru] (2022-10-28 11:24:25.433) <SECURITY_LOG>: Connection "CID-5904": Successfully authenticated as user "s_a_miskov".
+TEXT = '[{$per1=WORD}.{$per2=WORD}.{$per3=WORD}/VPN/{event_src.hostname=HOSTNAME}]({time=DATETIME})<{event_src.subsys=WORDDASH}>: Connection {$per4=STRING} Successfully authenticated as user "{subject.name = WORDDASH}".'
+
+
+dst.hostname = substr($dst, 0,length($dst)-1)
+subject="account"
+object = "service"
+action = "login"
+status = "success"
+importance = "info"
+id = "VPN_Success_auth"
