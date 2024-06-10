@@ -1,0 +1,18 @@
+#<158>1 2024-01-29T13:02:10.239754+03:00 S-Kali-Linux LOKI 2037322 1 - ﻿LOKI: Notice: MODULE: Init MESSAGE: Starting Loki Scan VERSION: 0.51.0 SYSTEM: S-Kali-Linux TIME: 20240129T10:02:10Z PLATFORM:     PROC:  ARCH: 64bit ELF
+TEXT = '<158>{NUMBER}{time=DATETIME}{event_src.hostname=STRING}{event_src.vendor=STRING} {NUMBER}{NUMBER} - {STRING}{$category.generic=STRING} MODULE: {subject.name = STRING} MESSAGE: {datafield1 = STRING+}'
+category.generic=replace($category.generic, "",":")
+$check = find_substr(datafield1,'SYSTEM:')
+if $check > 0 then
+    submessage("TEXT", "starting", $datafield1)
+else
+    datafield1 = datafield1
+endif
+subformula "starting"
+    TEXT = '{WORD+} VERSION: {subject.version=STRING} SYSTEM: {object.name=STRING}{datafield2=STRING+}'
+endsubformula
+event_src.title = event_src.vendor
+subject = "service"
+action = "detect"
+object = "file_object"
+status = "success"
+id = "LOKI_normalization_158"
