@@ -1,0 +1,10 @@
+#[vpn1.sit.ru/VPN/vpn.sit.ru] (2022-12-06 16:51:07.768) <SECURITY_LOG>: Connection "CID-11403": User authentication failed. The user name that has been provided was "s_a_miskov1".
+
+TEXT = '[{$per1=WORD}.{$per2=WORD}.{$per3=WORD}/VPN/{event_src.hostname=HOSTNAME}] ({time=DATETIME})<{event_src.subsys=WORDDASH}>: Connection "CID-{$connection=NUMBER}": User authentication failed. The user name that has been provided was "{subject.name = WORDDASH}".'
+
+subject= "account"
+object = "service"
+action = "login"
+status = "failure"
+importance = "info"
+id = "VPN_authentication_failed"
