@@ -1,0 +1,31 @@
+# <182>Aug  4 18:05:11 s3 tag_audit_log: 1659625506.673 164813 46.226.226.70 TCP_TUNNEL/200 5512 CONNECT collections.yandex.ru:443 - HIER_DIRECT/87.250.250.29 -
+
+TEXT = '{"<"NUMBER">"}{time=DATETIME}{event_src.hostname=STRING}{datafield7=STRING}{datafield2=STRING}{datafield3=STRING}{src.ip=IPV4}{$tcp =STRING}{datafield5=NUMBER}{subject.type=STRING}{$dst.host=STRING}-{$dst=STRING}{datafield6=STRING}'
+action = "access"
+object = "host"
+status = "success"
+subject = "account"
+datafield4 = substr($tcp,find_substr($tcp,"/")+1,length($tcp)) #ответ сервера
+$dst.host = replace($dst.host,"","http://")
+$dst.host = replace($dst.host,"","https://")
+$tmp = find_substr($dst.host,":")
+if  $tmp > 0 then
+    $tmp2 = length($dst.host)
+   dst.port= substr($dst.host,$tmp+1,$tmp2)
+else 
+   dst.port = 80    
+endif
+$dst.host1 = substr($dst.host,0,find_substr($dst.host,":"))
+$dst.host2 = substr($dst.host,0,find_substr($dst.host,"/"))
+if length($dst.host1) > 0 then
+    dst.hostname = $dst.host1
+elif length($dst.host2) > 0 then 
+    dst.hostname = $dst.host2
+endif
+
+dst.ip = substr($dst,find_substr($dst,"/")+1,length($dst))
+importance = "info"
+event_src.vendor = "squid"
+event_src.title = "squid"
+event_src.category = "Proxy server"
+id = "Proxy_Squid_syslog_access"
