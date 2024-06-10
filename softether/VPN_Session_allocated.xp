@@ -1,0 +1,13 @@
+#[vpn1.sit.ru/VPN/vpn.sit.ru] (2022-11-23 16:47:15.855) <SECURITY_LOG>: Session "SID-LOCALBRIDGE-1": The DHCP server of host "5E-FD-37-E7-55-F1" (10.7.128.1) on this session allocated, for host "SID-S_A_MISKOV-272" on another session "5E-57-78-08-DC-36", the new IP address 10.7.128.180.
+
+TEXT = '[{$per1=WORD}.{$per2=WORD}.{$per3=WORD}/VPN/{event_src.hostname=HOSTNAME}]({time=DATETIME})<{event_src.subsys=WORDDASH}>: Session "SID-{subject.name = WORDDASH}":  The DHCP server of host "{dst.mac=MACADDR}" ({dst.ip=IPV4}) on this session allocated, for host "SID-{$subject_name =UNTIL("-")}{NUMBER}" on another session "{src.mac=MACADDR}", the new IP address {src.ip=IPV4}.'
+src.host=src.ip
+subject.account.name=lower($subject_name)
+subject.name=lower($subject_name)
+subject= "account"
+object = "service"
+action = "login"
+status = "success"
+importance = "info"
+event_src.title="SoftEther VPN"
+id = "VPN_Session_allocated"
