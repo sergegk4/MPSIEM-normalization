@@ -1,0 +1,10 @@
+#[vpn1.sit.ru/VPN] (2022-11-23 16:47:41.433) <SERVER_LOG>: The connection with the client (IP address 10.7.0.7, Port number 29536) has been disconnected.
+
+TEXT = '[{event_src.hostname=HOSTNAME}/VPN]({time=DATETIME})<{event_src.subsys=WORDDASH}>: The connection with the client (IP address {src.ip=IPV4}, Port number {src.port=NUMBER}) has been disconnected.'
+
+subject="host"
+object = "service"
+action = "disconnect"
+status = "success"
+importance = "info"
+id = "VPN_Session_disconnected"
