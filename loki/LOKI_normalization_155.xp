@@ -1,0 +1,10 @@
+#<155>1 2024-01-29T13:15:55.005099+03:00 S-Kali-Linux LOKI 2037339 4258 - ﻿LOKI: Error: MODULE: FileScan MESSAGE: Cannot YARA scan file: b'/home/administrator/PowerSploit/Recon'
+TEXT = '<155>{NUMBER}{time=DATETIME}{event_src.hostname=STRING}{event_src.vendor=STRING} {NUMBER}{NUMBER} - {STRING}{$category.generic=STRING} MODULE: {subject.name = STRING} MESSAGE: {datafield1 = WORD+}file: {$object.name = STRING+}'
+category.generic = replace($category.generic, "", ":")
+object.name = replace($object.name, "", "b'")
+event_src.title = event_src.vendor
+subject = "service"
+action = "detect"
+object = "file_object"
+status = "success"
+id = "LOKI_normalization_155"
