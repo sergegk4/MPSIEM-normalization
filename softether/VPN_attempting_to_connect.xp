@@ -1,0 +1,10 @@
+#[vpn1.sit.ru/VPN/vpn.sit.ru] (2022-11-23 16:31:51.599) <SECURITY_LOG>: The connection "CID-6319" (IP address: 10.10.0.7, Host name: SIT-03, Port number: 36077, Client name: "SoftEther VPN Client", Version: 4.39, Build: 9772) is attempting to connect to the Virtual Hub. The auth type provided is "External server authentication" and the user name is "s_a_miskov".
+
+TEXT = '[{$per1=WORD}.{$per2=WORD}.{$per3=WORD}/VPN/{event_src.hostname=HOSTNAME}]({time=DATETIME})<{event_src.subsys=WORDDASH}>: The connection "CID-{$connection=NUMBER}" (IP address: {src.ip=IPV4}, Host name: {src.hostname = WORDDASH | src.ip = IPV4} ,Port number: {src.port=NUMBER}, Client name: "{$ClientName=WORDDASH*}", Version: {$version=UNTIL(",")} Build:{$build=UNTIL(")")}is attempting to connect to the Virtual Hub. The auth type provided is "External server authentication" and the user name is "{subject.name = WORDDASH}".'
+
+subject= "account"
+object = "service"
+action = "connect"
+status = "success"
+importance = "info"
+id = "VPN_attempting_to_connect"
