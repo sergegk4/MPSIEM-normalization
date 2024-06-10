@@ -1,12 +1,11 @@
 # MPSIEM-normalization
 Normalization formulas for Positive Technologies MaxPatrol SIEM
-
 Формулы нормализации для PT MaxPatrol SIEM для:
 	прокси-сервера SQUID
 	VPN-сервера SoftEther
 	инструмента анализа IOCs Loki (при настройке отправки логов работы Loki по syslog на коллектор MP SIEM).
-		
-	
+
+
 Правила локализации для указанных правил:
 1. Proxy_Squid_syslog_access:
 	Клиент прокси-сервера {src.ip} получил доступ к {dst.hostname}
