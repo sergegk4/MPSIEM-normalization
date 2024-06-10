@@ -1,0 +1,9 @@
+#[vpn1.sit.ru/VPN] (2022-12-07 16:34:24.979) <SERVER_LOG>: On the TCP Listener (Port 443), a Client (IP address 10.10.0.7, Host name "SIT-03", Port number 30314) has connected.
+TEXT = '[{event_src.hostname=HOSTNAME}/VPN]({time=DATETIME}) <{event_src.subsys=WORDDASH}>: On the TCP Listener (Port {dst.port=NUMBER}), a Client (IP address {src.ip=IPV4}, Host name "{src.hostname=HOSTNAME}", Port number {src.port=NUMBER}) has connected.'
+
+subject= "system"
+object = "client"
+action = "connect"
+status = "success"
+importance = "info"
+id = "VPN_client_connected"
