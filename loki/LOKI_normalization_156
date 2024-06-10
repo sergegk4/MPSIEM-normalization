@@ -1,0 +1,27 @@
+#<156>1 2024-01-29T13:15:03.286049+03:00 S-Kali-Linux LOKI 2037339 4065 - ﻿LOKI: Warning: MODULE: FileScan MESSAGE: FILE: /home/administrator/CVE-2023-4911/CVE-2023-44487/venv/lib/python3.11/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-311.pyc SCORE: 60 TYPE: UNKNOWN SIZE: 11349 FIRST_BYTES: b'-'  CREATED: Thu Oct 26 15:53:03 2023 MODIFIED: Thu Oct 26 15:53:03 2023 ACCESSED: Mon Jan 29 13:15:03 2024 REASON_1: File Name IOC matched PATTERN: /(cve|CVE)-20[012][0-9]\-[0-9]{4,5}.{0,20}($|/) SUBSCORE: 60 DESC: Exploit Code File Names
+TEXT = '{"<"NUMBER">"}{NUMBER}{time=DATETIME}{event_src.hostname=STRING}{$event_src.vendor=STRING}{NUMBER}{NUMBER}-{STRING}{$category.generic=STRING}{STRING}{subject.name=STRING}MESSAGE:{datafield1=STRING}{object.name=STRING+} SCORE: {alert.ioc_value=NUMBER} TYPE: {$context1 = WORD+} SIZE: {datafield3 = NUMBER} FIRST_BYTES: {STRING}{STRING}{$datafield4 = STRING+} MODIFIED: {datafield5 = STRING+} ACCESSED: {datafield6 = STRING+} REASON_1: {reason = WORDDASH+} PATTERN: {datafield7 = STRING} SUBSCORE: {NUMBER} DESC: {object.property = STRING+}{STRING+}'
+category.generic = replace($category.generic, "", ":")
+event_src.vendor = $event_src.vendor
+
+#alert.ioc_provider = $event_src.vendor
+#изменить в сиеме!
+#datafield2 = $alert.ioc_value
+#alert.ioc_value = $alert.ioc_value
+#####
+$check = find_substr($datafield4,'MD5')
+if $check > 0 then
+    datafield4 = "True"
+    submessage("TEXT", "hashes", $datafield4)
+
+else
+    datafield4 = $datafield4
+    datafield10 = $check
+endif
+subformula "hashes"
+TEXT = '{STRING+} MD5: {object.hash.md5 = STRING+} SHA1: {object.hash.sha1 = STRING} SHA256: {object.hash.sha256 = STRING}{STRING+}'
+endsubformula
+subject = "service"
+action = "detect"
+object = "file_object"
+status = "success"
+id = "LOKI_normalization_156"
