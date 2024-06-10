@@ -1,5 +1,6 @@
 # MPSIEM-normalization
 Normalization formulas for Positive Technologies MaxPatrol SIEM
+
 Формулы нормализации для PT MaxPatrol SIEM для:
 	прокси-сервера SQUID
 	VPN-сервера SoftEther
